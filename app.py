@@ -6328,6 +6328,8 @@ def process_measure_226(df):
 
     age_col = get_age_column(df3)
     if age_col:
+        df3[age_col] = pd.to_numeric(df3[age_col], errors='coerce')
+        df3 = df3.dropna(subset=[age_col])
         df3 = df3[df3[age_col] >= 18]
 
     return df3
