@@ -6385,7 +6385,9 @@ def process_measure_226(df):
     if age_col:
         df3[age_col] = pd.to_numeric(df3[age_col], errors='coerce')
         df3 = df3.dropna(subset=[age_col])
-        df3 = df3[df3[age_col] >= 18]
+        age_min = MEASURE_CONFIGS["Measure 226"].get("age_min")
+        if age_min is not None:
+            df3 = df3[df3[age_col] >= age_min]
 
     return df3
 
@@ -6847,7 +6849,6 @@ st.markdown(
     '</div>',
     unsafe_allow_html=True
 )
-
 
 
 
